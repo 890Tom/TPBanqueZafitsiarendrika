@@ -5,6 +5,7 @@
 package mg.zafitsiarendrika.tpbanquezafitsiarendrika.service;
 
 import jakarta.annotation.sql.DataSourceDefinition;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -30,19 +31,24 @@ import mg.zafitsiarendrika.tpbanquezafitsiarendrika.entity.CompteBancaire;
             "driverClass=com.mysql.cj.jdbc.Driver"
         }
 )
-@RequestScoped
+@ApplicationScoped
 public class GestionnaireCompte {
-    
+
     @PersistenceContext(unitName = "banquePU")
     private EntityManager em;
-    
-    public void creerCompte(CompteBancaire c){
+
+    public void creerCompte(CompteBancaire c) {
         em.persist(c);
     }
-    
-    public List<CompteBancaire> getAllComptes(){
+
+    public List<CompteBancaire> getAllComptes() {
         TypedQuery<CompteBancaire> query = em.createNamedQuery("CompteBancaire.findAll", CompteBancaire.class);
         return query.getResultList();
+    }
+
+    public long nbComptes() {
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM CompteBancaire c", Long.class);
+        return query.getSingleResult();
     }
 
     /**
@@ -50,5 +56,5 @@ public class GestionnaireCompte {
      */
     public GestionnaireCompte() {
     }
-    
+
 }
