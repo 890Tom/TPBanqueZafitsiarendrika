@@ -27,25 +27,34 @@
                                              style="width:150px"/>
                             </p:outputPanel>
                         </f:facet>
-                        
+
                         <p:column sortBy="#{item.nom}" filterBy="#{item.nom}">
                             <f:facet name="header">
                                 <h:outputText value="Nom" />
                             </f:facet>
                             <h:link outcome="transaction?idCompteBancaire=#{item.id}" 
-            value="#{item.nom}"/>
-                            <!--<h:outputText value="#{item.nom}" />-->
+                                    value="#{item.nom}"/>
+                                                    <!--<h:outputText value="#{item.nom}" />-->
                         </p:column>
-                        
+
                         <p:column sortBy="#{item.solde}" filterBy="#{item.solde}">
                             <f:facet name="header">
                                 <h:outputText value="Solde" />
                             </f:facet>
                             <h:outputText value="#{item.solde}" />
                         </p:column>
+
+                        <p:column width="100">
+                            <f:facet name="header">
+                                <h:outputText value="Operations" />
+                            </f:facet>
+                            <h:commandLink action="#{listeComptes.supprimerCompte(item)}" title="Supprimer le compte de #{item.nom}" >
+                                <h:graphicImage name="img/del.png" />
+                            </h:commandLink>
+                        </p:column>
                     </p:dataTable>
                 </h:form>
-                
+
             </ui:define>
 
         </ui:composition>
