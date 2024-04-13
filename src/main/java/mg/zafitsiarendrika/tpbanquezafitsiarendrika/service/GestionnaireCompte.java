@@ -69,6 +69,18 @@ public class GestionnaireCompte {
     public CompteBancaire findById(int idCompteBancaire){
         return em.find(CompteBancaire.class, idCompteBancaire);
     }
+    
+    @Transactional
+    public void deposer(CompteBancaire compteBancaire, int montant){
+        compteBancaire.deposer(montant);
+        update(compteBancaire);
+    }
+    
+    @Transactional
+    public void retirer(CompteBancaire compteBancaire, int montant){
+        compteBancaire.retirer(montant);
+        update(compteBancaire);
+    }
 
     /**
      * Creates a new instance of GestionnaireCompte

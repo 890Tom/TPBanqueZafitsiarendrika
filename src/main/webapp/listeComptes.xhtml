@@ -32,7 +32,9 @@
                             <f:facet name="header">
                                 <h:outputText value="Nom" />
                             </f:facet>
-                            <h:outputText value="#{item.nom}" />
+                            <h:link outcome="transaction?idCompteBancaire=#{item.id}" 
+            value="#{item.nom}"/>
+                            <!--<h:outputText value="#{item.nom}" />-->
                         </p:column>
                         
                         <p:column sortBy="#{item.solde}" filterBy="#{item.solde}">
