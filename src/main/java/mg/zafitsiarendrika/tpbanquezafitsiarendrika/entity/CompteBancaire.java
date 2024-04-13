@@ -25,11 +25,11 @@ public class CompteBancaire implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String nom;
     private int solde;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
