@@ -33,12 +33,12 @@
                             <f:selectItem itemValue="depot" itemLabel="Depot" />
                             <f:selectItem itemValue="retrait" itemLabel="Retrait" />
                         </h:selectOneRadio>
-                        <h:message for="typeTransaction"/>
+                        <h:message for="typeTransaction" errorStyle="color: red"/>
                         
                         Montant :
                         <h:inputText id="montant" value="#{transaction.montant}" 
                                      required="true" validator="#{transaction.validateSolde}"/>
-                        <h:message for="montant"/>
+                        <h:message for="montant" errorStyle="color: red"/>
                     </h:panelGrid>
                     <h:commandButton action="#{transaction.enregistrerTransaction()}" value="Enregistrer la transaction" />
                 </h:form>

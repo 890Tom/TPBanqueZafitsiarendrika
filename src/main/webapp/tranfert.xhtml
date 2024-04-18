@@ -2,33 +2,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="jakarta.faces.html">
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./WEB-INF/templates/template_defaut.xhtml">
 
             <ui:define name="top">
-                top
+                Transferer de l'argent
             </ui:define>
 
             <ui:define name="content">
                 <h:form id="form">
                     <h:panelGrid columns="3">
                         ID compte source : 
-                        <h:inputText id="source" size="3" value="#{transfert.idSource}" required="true"
+                        <p:inputText id="source" size="20" value="#{transfert.idSource}" required="true"
                                      converterMessage="L'id est un nombre entier" />
-                        <h:message for="source" />
+                        <h:message for="source" errorStyle="color: red"/>
                         
                         ID compte destination : 
-                        <h:inputText id="destination" size="3" value="#{transfert.idDestination}" required="true"
+                        <p:inputText id="destination" size="20" value="#{transfert.idDestination}" required="true"
                                      converterMessage="L'id est un nombre entier" />
-                        <h:message for="destination" />
+                        <h:message for="destination" errorStyle="color: red"/>
                         
                         Montant : 
-                        <h:inputText id="montant" size="3" value="#{transfert.montant}" required="true"
+                        <p:inputText id="montant" size="20" value="#{transfert.montant}" required="true"
                                      converterMessage="Le montant est un nombre entier" />
-                        <h:message for="montant" />
+                        <h:message for="montant" errorStyle="color: red"/>
                     </h:panelGrid>
                     <h:commandButton value="Transferer" action="#{transfert.transferer()}" />
                 </h:form>

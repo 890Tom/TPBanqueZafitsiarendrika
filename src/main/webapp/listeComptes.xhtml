@@ -28,7 +28,7 @@
                             </p:outputPanel>
                         </f:facet>
 
-                        <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <p:column sortBy="#{item.id}">
                             <f:facet name="header">
                                 <h:outputText value="ID" />
                             </f:facet>
@@ -40,25 +40,27 @@
                             <f:facet name="header">
                                 <h:outputText value="Nom" />
                             </f:facet>
-                            <h:link outcome="changerNom?idCompteBancaire=#{item.id}" 
-                                    value="#{item.nom}"/>
-                                                    <!--<h:outputText value="#{item.nom}" />-->
+                            <h:outputText value="#{item.nom}" />
                         </p:column>
 
-                        <p:column sortBy="#{item.solde}" filterBy="#{item.solde}">
+                        <p:column sortBy="#{item.solde}" >
                             <f:facet name="header">
                                 <h:outputText value="Solde" />
                             </f:facet>
-                            <h:outputText value="#{item.solde}" />
+                            <h:outputText value="#{item.solde}">
+                                <f:convertNumber pattern="###,###,###"/>
+                            </h:outputText>
                         </p:column>
 
-                        <p:column width="100">
+                        <p:column width="200">
                             <f:facet name="header">
                                 <h:outputText value="Operations" />
                             </f:facet>
                             <h:commandLink action="#{listeComptes.supprimerCompte(item)}" title="Supprimer le compte de #{item.nom}" >
                                 <h:graphicImage name="img/del.png" />
                             </h:commandLink>
+                            <h:link outcome="changerNom?idCompteBancaire=#{item.id}" 
+                                    value="Modifier le nom"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

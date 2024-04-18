@@ -9,6 +9,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import mg.zafitsiarendrika.tpbanquezafitsiarendrika.entity.CompteBancaire;
+import mg.zafitsiarendrika.tpbanquezafitsiarendrika.jsf.util.Util;
 import mg.zafitsiarendrika.tpbanquezafitsiarendrika.service.GestionnaireCompte;
 
 /**
@@ -45,6 +46,7 @@ public class AjoutCompte {
     public String ajouter(){
         CompteBancaire compte = new CompteBancaire(nom, solde);
         gestionnaireCompte.creerCompte(compte);
+        Util.addFlashInfoMessage("Le compte de "+ nom + " a ete cree avec succes");
         return "listeComptes?faces-redirect=true";
     }
 
