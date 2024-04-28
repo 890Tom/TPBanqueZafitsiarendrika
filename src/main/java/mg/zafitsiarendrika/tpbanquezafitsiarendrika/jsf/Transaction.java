@@ -101,20 +101,19 @@ public class Transaction implements Serializable {
     }
 
     public String enregistrerTransaction() {
-        try{
-            
-        if (typeTransaction.equals("depot")) {
-            gestionnaireCompte.deposer(compteBancaire, montant);
-        } else {
-            gestionnaireCompte.retirer(compteBancaire, montant);
-        }
-        Util.addFlashInfoMessage("Transaction enregistré sur compte de " + compteBancaire.getNom());
-        return "listeComptes?faces-redirect=true";
-        }
-        catch(OptimisticLockException  ex){
+        try {
+
+            if (typeTransaction.equals("depot")) {
+                gestionnaireCompte.deposer(compteBancaire, montant);
+            } else {
+                gestionnaireCompte.retirer(compteBancaire, montant);
+            }
+            Util.addFlashInfoMessage("Transaction enregistré sur compte de " + compteBancaire.getNom());
+            return "listeComptes?faces-redirect=true";
+        } catch (OptimisticLockException ex) {
             Util.addFlashInfoMessage("Le compte de " + compteBancaire.getNom()
-                  + " a été modifié ou supprimé par un autre utilisateur ! Essayer a nouveau ");
-        return "listeComptes?faces-redirect=true";
+                    + " a été modifié ou supprimé par un autre utilisateur ! Essayer a nouveau ");
+            return "listeComptes?faces-redirect=true";
         }
     }
 
