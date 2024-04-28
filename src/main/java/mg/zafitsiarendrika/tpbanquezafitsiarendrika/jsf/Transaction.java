@@ -12,6 +12,7 @@ import jakarta.faces.validator.ValidatorException;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.OptimisticLockException;
 import java.io.Serializable;
 import mg.zafitsiarendrika.tpbanquezafitsiarendrika.entity.CompteBancaire;
 import mg.zafitsiarendrika.tpbanquezafitsiarendrika.jsf.util.Util;
@@ -100,6 +101,8 @@ public class Transaction implements Serializable {
     }
 
     public String enregistrerTransaction() {
+        try{
+            
         if (typeTransaction.equals("depot")) {
             gestionnaireCompte.deposer(compteBancaire, montant);
         } else {
@@ -107,6 +110,12 @@ public class Transaction implements Serializable {
         }
         Util.addFlashInfoMessage("Transaction enregistré sur compte de " + compteBancaire.getNom());
         return "listeComptes?faces-redirect=true";
+        }
+        catch(OptimisticLockException  ex){
+            Util.addFlashInfoMessage("Le compte de " + compteBancaire.getNom()
+                  + " a été modifié ou supprimé par un autre utilisateur ! Essayer a nouveau ");
+        return "listeComptes?faces-redirect=true";
+        }
     }
 
     /**
