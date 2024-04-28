@@ -34,7 +34,7 @@ public class CompteBancaire implements Serializable {
     private String nom;
     private int solde;
     
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)  
+    @OneToMany(cascade=CascadeType.ALL)  
     private List<OperationBancaire> operations = new ArrayList<>();  
                     
     public List<OperationBancaire> getOperations() {  
