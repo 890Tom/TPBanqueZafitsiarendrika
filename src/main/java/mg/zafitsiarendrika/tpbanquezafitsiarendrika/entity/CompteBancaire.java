@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Version;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,7 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="CompteBancaire.findAll", query = "SELECT DISTINCT c FROM CompteBancaire c JOIN FETCH c.operations"),
-})
+    @NamedQuery(name = "CompteBancaire.findAll", query = "SELECT DISTINCT c FROM CompteBancaire c JOIN FETCH c.operations"),})
 public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,12 +33,14 @@ public class CompteBancaire implements Serializable {
     private Integer id;
     private String nom;
     private int solde;
-    
-    @OneToMany(cascade=CascadeType.ALL)  
-    private List<OperationBancaire> operations = new ArrayList<>();  
-                    
-    public List<OperationBancaire> getOperations() {  
-      return operations;  
+    @Version
+    private int version;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OperationBancaire> operations = new ArrayList<>();
+
+    public List<OperationBancaire> getOperations() {
+        return operations;
     }
 
     public Integer getId() {
@@ -60,29 +62,29 @@ public class CompteBancaire implements Serializable {
     public void setSolde(int solde) {
         this.solde = solde;
     }
-    
-    public CompteBancaire(String nom, int solde){
+
+    public CompteBancaire(String nom, int solde) {
         this.nom = nom;
         this.solde = solde;
-        operations.add(new OperationBancaire("Creation du compte",solde));
+        operations.add(new OperationBancaire("Creation du compte", solde));
     }
-    
-    public void deposer(int montant){
+
+    public void deposer(int montant) {
         solde += montant;
         operations.add(new OperationBancaire("Debit", montant));
     }
-    
-    public void retirer(int montant){
-        if(montant < solde){
+
+    public void retirer(int montant) {
+        if (montant < solde) {
             solde -= montant;
-        }else{
+        } else {
             solde = 0;
         }
         operations.add(new OperationBancaire("Credit", -montant));
     }
-    
-    public CompteBancaire(){
-        
+
+    public CompteBancaire() {
+
     }
 
     @Override
@@ -109,5 +111,5 @@ public class CompteBancaire implements Serializable {
     public String toString() {
         return "mg.zafitsiarendrika.tpbanquezafitsiarendrika.entity.CompteBancaire[ id=" + id + " ]";
     }
-    
+
 }
