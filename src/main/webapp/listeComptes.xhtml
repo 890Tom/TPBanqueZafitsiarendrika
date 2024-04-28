@@ -62,6 +62,15 @@
                             <h:link outcome="changerNom?idCompteBancaire=#{item.id}" 
                                     value="Modifier le nom"/>
                         </p:column>
+                        
+                        <p:column width="100">
+                            <f:facet name="header">
+                                <h:outputText value="Historique Operations" />
+                            </f:facet>
+                            
+                            <h:link outcome="operations?idCompteBancaire=#{item.id}" 
+                                    value="Details"/>
+                        </p:column>
                     </p:dataTable>
                 </h:form>
 
